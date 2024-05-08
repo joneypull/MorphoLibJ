@@ -30,3 +30,8 @@ jobs:
           MAVEN_PASS: ${{ secrets.MAVEN_PASS }}
           OSSRH_PASS: ${{ secrets.OSSRH_PASS }}
           SIGNING_ASC: ${{ secrets.SIGNING_ASC }}
+      - name: Upload JAR file
+        uses: actions/upload-artifact@v2
+        with:
+          name: morpholib
+          path: target/*.jar
