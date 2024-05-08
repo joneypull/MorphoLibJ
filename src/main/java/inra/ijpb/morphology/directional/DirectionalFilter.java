@@ -343,7 +343,9 @@ public class DirectionalFilter extends AlgoStub
 					float value = oriented.getf(x, y);
 					if (value * sign > result.getf(x, y) * sign)
 					{
-						result.setf(x, y, value);
+						//none zero is overay with theta
+						//result.setf(x, y, value);
+						result.setf(x, y, (float)theta);
 					}
 				}
 			}
