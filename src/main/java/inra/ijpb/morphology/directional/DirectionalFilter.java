@@ -339,12 +339,12 @@ public class DirectionalFilter extends AlgoStub
 				for (int x = 0; x < sizeX; x++)
 				{
 					float value = oriented.getf(x, y);
-					int r_value = (int)result.getf(x, y);
+					float r_value = result.getf(x, y);
 					if (value * sign > r_value * sign)
 					{
 						//none zero is overay with theta, for only once
 						//result.setf(x, y, value);						
-						if(r_value == ref_fill_value)
+						if((int)r_value == ref_fill_value)
 							result.setf(x, y, (float)theta);
 					}
 				}
