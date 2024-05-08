@@ -308,14 +308,12 @@ public class DirectionalFilter extends AlgoStub
 		
 		// initialize result
 		ImageProcessor result = image.duplicate();
+		// reference pixel value
+		int ref_fill_value = Integer.MAX_VALUE;
 		if (this.type == Type.MAX)
-		{
-			result.setValue(0);
-		}
-		else
-		{
-			result.setValue(Integer.MAX_VALUE);
-		}
+			ref_fill_value = 0;
+		
+		result.setValue(ref_fill_value);
 		result.fill();
 		
 		int sizeX = image.getWidth();
@@ -341,11 +339,13 @@ public class DirectionalFilter extends AlgoStub
 				for (int x = 0; x < sizeX; x++)
 				{
 					float value = oriented.getf(x, y);
-					if (value * sign > result.getf(x, y) * sign)
+					int r_value = (int)result.getf(x, y);
+					if (value * sign > r_value * sign)
 					{
-						//none zero is overay with theta
-						//result.setf(x, y, value);
-						result.setf(x, y, (float)theta);
+						//none zero is overay with theta, for only once
+						//result.setf(x, y, value);						
+						if(r_value == ref_fill_value)
+							result.setf(x, y, (float)theta);
 					}
 				}
 			}
